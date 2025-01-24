@@ -156,9 +156,9 @@ jobs:
             export INSTANCE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query "Reservations[*].Instances[*].PublicIpAddress" --output text)
             echo $INSTANCE_IP >> Submission3/.circleci/ansible/inventory.txt
       - persist_to_workspace:
-          root: ~/
+          root: ~/project
           paths:
-            - project/.circleci/ansible/inventory.txt
+            - Submission3/.circleci/ansible/inventory.txt
       - destroy-environment    
 
   configure-infrastructure:

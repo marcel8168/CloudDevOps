@@ -266,7 +266,8 @@ jobs:
             apk add --update npm
       - run:
           name: Deploy backend
-          command: |cd backend
+          command: |
+            cd backend
             npm i
             npm run build
             cd ..

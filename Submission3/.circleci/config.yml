@@ -136,7 +136,6 @@ jobs:
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
               --tags project=udapeople
-              exit 1
       - run:
           name: Ensure front-end infrastructure exist
           command: |
@@ -145,14 +144,12 @@ jobs:
               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
               --tags project=udapeople
-              exit 1
       - run:
           name: Add back-end ip to ansible inventory
           command: |
             INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=tag:project,Values=udapeople" --query "Reservations[*].Instances[*].InstanceId" --output text)
             INSTANCE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query "Reservations[*].Instances[*].PublicIpAddress" --output text)
             echo $INSTANCE_IP >> Submission3/.circleci/ansible/inventory.txt
-            exit 1
       - persist_to_workspace:
           root: ~/
           paths:
